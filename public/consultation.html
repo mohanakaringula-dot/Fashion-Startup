@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Consultation</title><link rel='stylesheet' href='/css/styles.css'></head>
+<body><div class='container'><h1>Book Consultation</h1><form id='consultForm' enctype='multipart/form-data'>
+<input name='event_date' type='date' required><textarea name='occasion_details' placeholder='Occasion details'></textarea><textarea name='measurements' placeholder='Measurements'></textarea>
+<input name='inspiration_image' type='file' accept='.jpg,.jpeg,.png'><input name='preferred_time' placeholder='Preferred time'><input name='urgent_deadline' type='date'>
+<button class='lux-btn'>Submit Consultation</button></form><p id='msg'></p></div>
+<script src='/js/app.js'></script><script>
+document.getElementById('consultForm').onsubmit=async(e)=>{e.preventDefault();const id=new URLSearchParams(location.search).get('designerId');const fd=new FormData(e.target);fd.append('designer_id',id);const r=await fetch('/api/consultations',{method:'POST',headers:CDA.state.token?{Authorization:`Bearer ${CDA.state.token}`}:{},body:fd}).then(x=>x.json());document.getElementById('msg').textContent=r.error||r.message||'Submitted';};
+</script></body></html>
