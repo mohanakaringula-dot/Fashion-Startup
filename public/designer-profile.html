@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Designer Profile</title><link rel='stylesheet' href='/css/styles.css'></head>
+<body><div class='container'><h1>Designer Profile</h1><div id='content' class='card'></div></div>
+<script src='/js/app.js'></script><script>
+(async()=>{const id=new URLSearchParams(location.search).get('id');const res=await fetch(`/api/designers/${id}`,{headers:CDA.state.token?{Authorization:`Bearer ${CDA.state.token}`}:{}}).then(r=>r.json());const d=res.designer;document.getElementById('content').innerHTML=d?`<h2>${d.name}</h2><p>${d.bio||''}</p><p>Lead Time: ${d.lead_time||''}</p><p>Consultation Fee: ₹${d.consultation_fee}</p><a class='lux-btn' href='/consultation?designerId=${d.id}'>Request Private Consultation</a>`:(res.error||'Not found');})();
+</script></body></html>

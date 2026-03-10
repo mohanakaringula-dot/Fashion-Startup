@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Designers</title><link rel='stylesheet' href='/css/styles.css'></head>
+<body><div class='container'><h1>Curated Designers</h1><div id='list' class='grid grid-3'></div></div>
+<script src='/js/app.js'></script><script>
+(async()=>{const res=await CDA.loadDesigners();const root=document.getElementById('list');(res.designers||[]).forEach(d=>{const el=document.createElement('div');el.className='card';el.innerHTML=`<h3>${d.name}</h3><p>${d.lead_time||''}</p><p>₹${d.consultation_fee}</p><a class='lux-btn' href='/consultation?designerId=${d.id}'>Request Private Consultation</a>`;root.appendChild(el);});if(res.error){root.innerHTML=res.error;}})();
+</script></body></html>
